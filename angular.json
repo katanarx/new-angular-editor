@@ -79,6 +79,7 @@
             "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
+            "aot": true,
             "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
@@ -98,6 +99,7 @@
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
+              "aot": true,
               "buildOptimizer": true,
               "budgets": [
                 {

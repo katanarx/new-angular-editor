@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import * as JSColor from '@eastdesire/jscolor';
 
 interface ColorpickerInstance {
+  hide: () => void;
   show: () => void;
 };
 
@@ -157,6 +158,7 @@ export class AngularEditorToolbarComponent implements AfterViewInit {
   @ViewChild('fileInput', {static: true}) myInputFile: ElementRef;
   @ViewChild('fgInput') fgInput: ElementRef;
   private colorPicker: ColorpickerInstance;
+  private colorPickerVisible = false;
 
   public get isLinkButtonDisabled(): boolean {
     return this.htmlMode || !this.editorService.selectedText;
@@ -171,16 +173,30 @@ export class AngularEditorToolbarComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.initColorPicker();
+  }
+
+  initColorPicker() {
     this.colorPicker = new JSColor(this.fgInput.nativeElement, {
+      width: 0,
+      height: 0,
       container: this.er.nativeElement,
-      closeButton: true,
       format: 'hex',
-      height: 80,
+      hideOnLeave: true,
+      hideOnPaletteClick: true,
       onChange: this.updateFgColor.bind(this),
-      onUpdate: this.updateFgColor.bind(this),
-      palette: '#fff #808080 #000 #996e36 #f55525 #ffe438 #88dd20 #22e0cd #269aff #bb1cd4',
-      paletteCols: 11,
+      onInput: this.updateFgColor.bind(this),
+      palette: '#000000 #2a7eb7 #3c9640 #f7c502 #ba2b27',
+      paletteCols: 1,
+      previewPadding: 0,
+      previewSize: 0,
       position: 'bottom',
+      showOnClick: false,
+      sliderSize: 0,
+      crossSize: 0,
+      controlBorderWidth: 0,
+      pointerBorderWidth: 0,
+      pointerThickness: 0,
     });
   }
 
@@ -392,14 +408,19 @@ export class AngularEditorToolbarComponent implements AfterViewInit {
 
   focus() {
     this.execute.emit('focus');
-    console.log('focused');
   }
 
   updateFgColor() {
+    this.colorPickerVisible = false;
     this.insertColor(this.fgInput.nativeElement.value, 'textColor');
   }
 
-  showColorPicker() {
-    this.colorPicker.show();
+  toggleColorPicker() {
+    if(this.colorPickerVisible)
+      this.colorPicker.hide();
+    else
+      this.colorPicker.show();
+
+    this.colorPickerVisible = !this.colorPickerVisible;
   }
 }
