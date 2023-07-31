@@ -96,9 +96,8 @@
   <div class="angular-editor-toolbar-set">
     <input
       style="display: none"
-      type="color" (change)="insertColor(fgInput.value, 'textColor')"
       #fgInput>
-    <button [id]="'foregroundColorPicker-'+id" type="button" class="angular-editor-button" (click)="focus(); ; fgInput.click()"
+    <button [id]="'foregroundColorPicker-'+id" type="button" class="angular-editor-button" (click)="focus(); ; showColorPicker()"
             title="Text Color"
             [disabled]="htmlMode" [hidden]="isButtonHidden('textColor')" tabindex="-1"><span
       class="color-label foreground"><i class="fa fa-font"></i></span>
@@ -159,5 +158,4 @@
             (click)="triggerCommand('toggleEditorMode')" [hidden]="isButtonHidden('toggleEditorMode')" tabindex="-1"><i
       class='fa fa-code'></i></button>
   </div>
-  <ng-content></ng-content>
 </div>
