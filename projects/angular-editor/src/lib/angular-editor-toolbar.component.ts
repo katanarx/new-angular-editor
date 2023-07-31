@@ -157,8 +157,9 @@ export class AngularEditorToolbarComponent implements AfterViewInit {
 
   @ViewChild('fileInput', {static: true}) myInputFile: ElementRef;
   @ViewChild('fgInput') fgInput: ElementRef;
+  @ViewChild('fgInputBtn') fgInputBtn: ElementRef;
+  @ViewChild('toolbarCtr') toolbarCtr: ElementRef;
   private colorPicker: ColorpickerInstance;
-  private colorPickerVisible = false;
 
   public get isLinkButtonDisabled(): boolean {
     return this.htmlMode || !this.editorService.selectedText;
@@ -180,9 +181,9 @@ export class AngularEditorToolbarComponent implements AfterViewInit {
     this.colorPicker = new JSColor(this.fgInput.nativeElement, {
       width: 0,
       height: 0,
-      container: this.er.nativeElement,
+      container: this.toolbarCtr.nativeElement,
       format: 'hex',
-      hideOnLeave: true,
+      hideOnLeave: false,
       hideOnPaletteClick: true,
       onChange: this.updateFgColor.bind(this),
       onInput: this.updateFgColor.bind(this),
@@ -191,7 +192,6 @@ export class AngularEditorToolbarComponent implements AfterViewInit {
       previewPadding: 0,
       previewSize: 0,
       position: 'bottom',
-      showOnClick: false,
       sliderSize: 0,
       crossSize: 0,
       controlBorderWidth: 0,
@@ -411,16 +411,24 @@ export class AngularEditorToolbarComponent implements AfterViewInit {
   }
 
   updateFgColor() {
-    this.colorPickerVisible = false;
     this.insertColor(this.fgInput.nativeElement.value, 'textColor');
   }
 
-  toggleColorPicker() {
-    if(this.colorPickerVisible)
-      this.colorPicker.hide();
-    else
-      this.colorPicker.show();
+  showColorPicker() {
+    this.colorPicker.show();
+    this.overrideColorPickerPosition();
+  }
 
-    this.colorPickerVisible = !this.colorPickerVisible;
+  overrideColorPickerPosition() {
+    setTimeout(() => {
+      const pickerWrappers =
+        document.getElementsByClassName('jscolor-picker-wrap') as HTMLCollectionOf<HTMLElement>;
+
+      Array.from(pickerWrappers).forEach((elem) => {
+        elem.style.position = 'absolute';
+        elem.style.left = '216px';
+        elem.style.bottom = '82px';
+      });
+    });
   }
 }

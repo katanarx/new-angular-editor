@@ -40,10 +40,13 @@ export declare class AngularEditorToolbarComponent implements AfterViewInit {
     execute: EventEmitter<string>;
     myInputFile: ElementRef;
     fgInput: ElementRef;
+    fgInputBtn: ElementRef;
+    toolbarCtr: ElementRef;
     private colorPicker;
     get isLinkButtonDisabled(): boolean;
     constructor(r: Renderer2, editorService: AngularEditorService, er: ElementRef, doc: any);
     ngAfterViewInit(): void;
+    initColorPicker(): void;
     /**
      * Trigger command from editor header buttons
      * @param command string from toolbar buttons
@@ -97,6 +100,7 @@ export declare class AngularEditorToolbarComponent implements AfterViewInit {
     focus(): void;
     updateFgColor(): void;
     showColorPicker(): void;
+    overrideColorPickerPosition(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<AngularEditorToolbarComponent, never>;
     static ɵcmp: i0.ɵɵComponentDeclaration<AngularEditorToolbarComponent, "angular-editor-toolbar", never, { "id": "id"; "uploadUrl": "uploadUrl"; "upload": "upload"; "showToolbar": "showToolbar"; "fonts": "fonts"; "customClasses": "customClasses"; "defaultFontName": "defaultFontName"; "defaultFontSize": "defaultFontSize"; "hiddenButtons": "hiddenButtons"; }, { "execute": "execute"; }, never, never>;
 }

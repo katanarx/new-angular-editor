@@ -1,4 +1,4 @@
-$fa-font-path: "/assets/fonts" !default;
+$fa-font-path: "https://netdna.bootstrapcdn.com/font-awesome/4.7.0/fonts" !default; // for referencing Bootstrap CDN font files directly
 @import "~font-awesome/scss/font-awesome.scss";
 
 a {
@@ -29,6 +29,8 @@ a {
   font-size: 0.8rem;
   padding: 0.2rem;
   border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
 
   .angular-editor-toolbar-set {
     display: none;
@@ -193,6 +195,8 @@ a {
     .select-font-size {
       display: inline-block;
       width: 50px;
+      position: relative;
+      top: 2px;
       @supports not( -moz-appearance:none ) {
         optgroup {
           font-size: 12px;
@@ -308,7 +312,7 @@ a {
         top: auto;
         bottom: -3px;
         right: auto;
-        width: 15px;
+        width: 10px;
         height: 2px;
         z-index: 0;
         background: #1b1b1b;

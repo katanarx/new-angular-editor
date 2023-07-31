@@ -1,4 +1,4 @@
-<div class="angular-editor-toolbar" *ngIf="showToolbar">
+<div class="angular-editor-toolbar" *ngIf="showToolbar" #toolbarCtr>
   <div class="angular-editor-toolbar-set">
     <button type="button" title="Undo" class="angular-editor-button" (click)="triggerCommand('undo')"
             [hidden]="isButtonHidden('undo')" tabindex="-1"><i
@@ -97,9 +97,9 @@
     <input
       style="display: none"
       #fgInput>
-      <button [id]="'foregroundColorPicker-'+id" type="button" class="angular-editor-button" (click)="focus(); ; toggleColorPicker()"
+    <button [id]="'foregroundColorPicker-'+id" type="button" class="angular-editor-button" (click)="focus(); ; showColorPicker()"
             title="Text Color"
-            [disabled]="htmlMode" [hidden]="isButtonHidden('textColor')" tabindex="-1"><span
+            [disabled]="htmlMode" [hidden]="isButtonHidden('textColor')" tabindex="-1" #fgInputBtn><span
       class="color-label foreground"><i class="fa fa-font"></i></span>
     </button>
     <input
